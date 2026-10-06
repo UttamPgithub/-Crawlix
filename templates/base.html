@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Crawlix | Freelance Engineering Team{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-indigo-600 selection:text-white">
+
+    <!-- Top Sticky Navigation Bar -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-3.5 flex items-center justify-between">
+
+            <!-- Brand Logo / Name: Crawlix -->
+            <a href="{{ url_for('home') }}" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-600/30 transition-transform duration-200 group-hover:scale-105">
+                    <span class="text-white font-extrabold text-base leading-none">3</span>
+                </div>
+                <span class="text-2xl font-black tracking-tight text-white transition-colors duration-150">
+                    Craw<span class="text-indigo-400">lix</span>
+                </span>
+            </a>
+
+            <!-- Desktop Menu Buttons -->
+            <nav class="hidden md:flex items-center gap-1.5 bg-slate-900/60 p-1 rounded-xl border border-slate-800">
+                <a href="{{ url_for('home') }}"
+                   class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150 {% if request.endpoint == 'home' %}bg-indigo-600 text-white shadow-sm shadow-indigo-500/20{% else %}text-slate-300 hover:text-white hover:bg-slate-800/80{% endif %}">
+                    Home
+                </a>
+
+                <a href="{{ url_for('team') }}"
+                   class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150 {% if request.endpoint == 'team' %}bg-indigo-600 text-white shadow-sm shadow-indigo-500/20{% else %}text-slate-300 hover:text-white hover:bg-slate-800/80{% endif %}">
+                    Team Details
+                </a>
+
+                <a href="{{ url_for('portfolio') }}"
+                   class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150 {% if request.endpoint == 'portfolio' %}bg-indigo-600 text-white shadow-sm shadow-indigo-500/20{% else %}text-slate-300 hover:text-white hover:bg-slate-800/80{% endif %}">
+                    Skills &amp; Projects
+                </a>
+
+                <a href="{{ url_for('demos') }}"
+                   class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150 {% if request.endpoint == 'demos' %}bg-indigo-600 text-white shadow-sm shadow-indigo-500/20{% else %}text-slate-300 hover:text-white hover:bg-slate-800/80{% endif %}">
+                    Project Demos
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobileMenuBtn" type="button" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition focus:outline-none" aria-label="Toggle navigation">
+                <svg id="menuOpenIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <svg id="menuCloseIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/95 px-6 py-4 space-y-2">
+            <a href="{{ url_for('home') }}"
+               class="block px-4 py-2.5 rounded-lg text-sm font-medium {% if request.endpoint == 'home' %}bg-indigo-600 text-white{% else %}text-slate-300 hover:bg-slate-800{% endif %}">
+                Home
+            </a>
+            <a href="{{ url_for('team') }}"
+               class="block px-4 py-2.5 rounded-lg text-sm font-medium {% if request.endpoint == 'team' %}bg-indigo-600 text-white{% else %}text-slate-300 hover:bg-slate-800{% endif %}">
+                Team Details
+            </a>
+            <a href="{{ url_for('portfolio') }}"
+               class="block px-4 py-2.5 rounded-lg text-sm font-medium {% if request.endpoint == 'portfolio' %}bg-indigo-600 text-white{% else %}text-slate-300 hover:bg-slate-800{% endif %}">
+                Skills &amp; Projects
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 py-10 bg-slate-950">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-slate-500">
+
+            <!-- Brand & Copyright -->
+            <div class="flex items-center gap-3">
+                <span class="font-semibold text-slate-300">Crawlix</span>
+                <span>•</span>
+                <span>Uttam Prajapati, Deep Vadher &amp; TBA</span>
+            </div>
+
+            <!-- Footer Navigation Links -->
+            <div class="flex items-center gap-6">
+                <a href="{{ url_for('home') }}" class="hover:text-indigo-400 transition">Home</a>
+                <a href="{{ url_for('team') }}" class="hover:text-indigo-400 transition">Team</a>
+                <a href="{{ url_for('portfolio') }}" class="hover:text-indigo-400 transition">Skills &amp; Projects</a>
+            </div>
+
+            <div class="text-xs text-slate-600">
+                © 2026 Crawlix. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const openIcon = document.getElementById('menuOpenIcon');
+        const closeIcon = document.getElementById('menuCloseIcon');
+
+        menuBtn.addEventListener('click', () => {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            if (isOpen) {
+                mobileMenu.classList.add('hidden');
+                openIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            } else {
+                mobileMenu.classList.remove('hidden');
+                openIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

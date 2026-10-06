@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Skills & Projects | Freelance Portfolio{% endblock %}
+
+{% block content %}
+<section class="py-16 px-6 max-w-6xl mx-auto space-y-16">
+    
+    <!-- Skills Matrix -->
+    <div>
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold tracking-tight">Our Skillset</h1>
+            <p class="text-slate-400 text-sm mt-1">Tools and frameworks our team leverages on client projects.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+            {% for category, skill_list in skills.items() %}
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+                <h2 class="text-base font-semibold text-indigo-300 mb-4">{{ category }}</h2>
+                <div class="flex flex-wrap gap-2">
+                    {% for item in skill_list %}
+                    <span class="bg-slate-800/70 border border-slate-700 text-slate-200 text-xs px-3 py-1.5 rounded-md font-mono">
+                        {{ item }}
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Project Showcase -->
+    <div>
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold tracking-tight">Featured Projects & Deliverables</h2>
+            <p class="text-slate-400 text-sm mt-1">Solutions developed by our three-engineer collective.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+            {% for project in projects %}
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">
+                            {{ project.status }}
+                        </span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">{{ project.title }}</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">{{ project.description }}</p>
+                </div>
+                <div>
+                    <div class="text-xs text-indigo-400 font-mono bg-slate-950 border border-slate-800/80 p-2.5 rounded-md">
+                        {{ project.tech }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+{% endblock %}
