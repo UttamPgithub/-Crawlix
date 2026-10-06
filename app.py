@@ -33,7 +33,7 @@ TEAM_MEMBERS = [
         "name": "We're hiring: Sales Lead",
         "role": "Head Of Sales Department",
         "experience": "4+ Years",
-        "bio": "Backed by 5+ years driving high-impact revenue growth, client acquisition, enterprise solution sales, and strategic client relationship management.",
+        "bio": "Backed by 4+ years driving high-impact revenue growth, client acquisition, enterprise solution sales, and strategic client relationship management.",
         "skills": ["B2B & Enterprise Sales", "Client Relationship Management", "Sales Pipeline & CRM", "Contract Negotiation", "Lead Generation", "Revenue Growth"]
     }
 ]
